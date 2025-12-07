@@ -3,158 +3,90 @@ import { LandingHero } from "@/components/sections/LandingHero";
 import { AccordionSection } from "@/components/sections/AccordionSection";
 import { FeaturesCardGrid } from "@/components/sections/FeaturesCardGrid";
 import { ProfileCardsGrid } from "@/components/sections/ProfileCardsGrid";
+import { useLandingData } from "@/hooks/useLandingData";
 
-const accordionItems = [
-  {
-    id: "1",
-    title: "Accordion Header",
-    content: "Data within accordion component. We provide comprehensive solutions tailored to your business needs.",
-  },
-  {
-    id: "2",
-    title: "Accordion Header 2",
-    content: "Data within accordion component. Our team of experts delivers measurable results and sustainable growth.",
-  },
-  {
-    id: "3",
-    title: "Accordion Header 3",
-    content: "Data within accordion component. We leverage cutting-edge technology and industry best practices.",
-  },
+// Feature card images (static as they're design assets)
+const featureImages = [
+  "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
+  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
+  "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80",
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
+  "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=80",
+  "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=80",
+  "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80",
+  "https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&q=80",
 ];
 
-const featureCards = [
-  {
-    id: "1",
-    eyebrow: "Strategy",
-    title: "Card Title Lorem Ipsum",
-    description: "Mauris ultricies urna adipiscing risus tristique gravida. Lectus sodales non et diam sem euismod est vulputate. Vitae semper.",
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80",
-    href: "/insights/1",
-    linkText: "View all news",
-  },
-  {
-    id: "2",
-    eyebrow: "Innovation",
-    title: "Card Title Lorem Ipsum",
-    description: "Mauris ultricies urna adipiscing risus tristique gravida. Lectus sodales non et diam sem euismod est vulputate. Vitae semper.",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80",
-    href: "/insights/2",
-    linkText: "View all news",
-  },
-  {
-    id: "3",
-    eyebrow: "Technology",
-    title: "Card Title Lorem Ipsum",
-    description: "Mauris ultricies urna adipiscing risus tristique gravida. Lectus sodales non et diam sem euismod est vulputate. Vitae semper.",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80",
-    href: "/insights/3",
-    linkText: "View all news",
-  },
-  {
-    id: "4",
-    eyebrow: "Operations",
-    title: "Card Title Lorem Ipsum",
-    description: "Mauris ultricies urna adipiscing risus tristique gravida. Lectus sodales non et diam sem euismod est vulputate. Vitae semper.",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80",
-    href: "/insights/4",
-    linkText: "View all news",
-  },
-  {
-    id: "5",
-    eyebrow: "Finance",
-    title: "Card Title Lorem Ipsum",
-    description: "Mauris ultricies urna adipiscing risus tristique gravida. Lectus sodales non et diam sem euismod est vulputate. Vitae semper.",
-    image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&q=80",
-    href: "/insights/5",
-    linkText: "View all news",
-  },
-  {
-    id: "6",
-    eyebrow: "Marketing",
-    title: "Card Title Lorem Ipsum",
-    description: "Mauris ultricies urna adipiscing risus tristique gravida. Lectus sodales non et diam sem euismod est vulputate. Vitae semper.",
-    image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=600&q=80",
-    href: "/insights/6",
-    linkText: "View all news",
-  },
-  {
-    id: "7",
-    eyebrow: "Analytics",
-    title: "Card Title Lorem Ipsum",
-    description: "Mauris ultricies urna adipiscing risus tristique gravida. Lectus sodales non et diam sem euismod est vulputate. Vitae semper.",
-    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80",
-    href: "/insights/7",
-    linkText: "View all news",
-  },
-  {
-    id: "8",
-    eyebrow: "Growth",
-    title: "Card Title Lorem Ipsum",
-    description: "Mauris ultricies urna adipiscing risus tristique gravida. Lectus sodales non et diam sem euismod est vulputate. Vitae semper.",
-    image: "https://images.unsplash.com/photo-1497215842964-222b430dc094?w=600&q=80",
-    href: "/insights/8",
-    linkText: "View all news",
-  },
-];
-
-const profiles = [
-  {
-    id: "1",
-    name: "Profile Name",
-    designation: "Designation",
-    location: "City, State, Country",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
-    href: "/team/1",
-  },
-  {
-    id: "2",
-    name: "Profile Name",
-    designation: "Designation",
-    location: "City, State, Country",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
-    href: "/team/2",
-  },
-  {
-    id: "3",
-    name: "Profile Name",
-    designation: "Designation",
-    location: "City, State, Country",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
-    href: "/team/3",
-  },
-  {
-    id: "4",
-    name: "Profile Name",
-    designation: "Designation",
-    location: "City, State, Country",
-    initials: "DS",
-    href: "/team/4",
-  },
-  {
-    id: "5",
-    name: "Profile Name",
-    designation: "Designation",
-    location: "City, State, Country",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",
-    href: "/team/5",
-  },
+const featureEyebrows = [
+  "Strategy",
+  "Innovation",
+  "Technology",
+  "Operations",
+  "Finance",
+  "Marketing",
+  "Analytics",
+  "Growth",
 ];
 
 const Landing = () => {
+  const { heroContent, accordionItems, features, teamMembers, loading } = useLandingData();
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-pulse text-muted-foreground">Loading...</div>
+        </div>
+      </Layout>
+    );
+  }
+
+  // Transform features to card format
+  const featureCards = features.map((feature, index) => ({
+    id: feature.id,
+    eyebrow: featureEyebrows[index % featureEyebrows.length],
+    title: feature.title,
+    description: feature.description,
+    image: featureImages[index % featureImages.length],
+    href: `/insights/${index + 1}`,
+    linkText: "View all news",
+  }));
+
+  // Transform team members to profile format
+  const profiles = teamMembers.map((member) => ({
+    id: member.id,
+    name: member.name,
+    designation: member.designation,
+    location: member.location,
+    image: member.image_url || undefined,
+    initials: member.initials || member.name.split(" ").map(n => n[0]).join(""),
+    href: member.href || `/team/${member.id}`,
+  }));
+
   return (
     <Layout>
       <LandingHero
-        eyebrow="Eyebrow"
-        headline="Display Headline"
-        description="Lorem ipsum dolor sit amet, consectetur."
-        primaryAction={{ label: "Primary Action", href: "/contact" }}
-        secondaryAction={{ label: "Secondary action", href: "/about" }}
+        eyebrow={heroContent?.badge_text || "Eyebrow"}
+        headline={heroContent?.title || "Display Headline"}
+        description={heroContent?.subtitle || "Lorem ipsum dolor sit amet, consectetur."}
+        primaryAction={{
+          label: heroContent?.cta_text || "Primary Action",
+          href: heroContent?.cta_link || "/contact",
+        }}
+        secondaryAction={{
+          label: heroContent?.secondary_cta_text || "Secondary action",
+          href: heroContent?.secondary_cta_link || "/about",
+        }}
         image="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?w=1200&q=80"
       />
 
       <AccordionSection
         heading="Heading Lorem Ipsum"
-        items={accordionItems}
+        items={accordionItems.map((item) => ({
+          id: item.id,
+          title: item.title,
+          content: item.content,
+        }))}
       />
 
       <FeaturesCardGrid
@@ -164,10 +96,7 @@ const Landing = () => {
         cards={featureCards}
       />
 
-      <ProfileCardsGrid
-        title="Title Lorem Ipsum"
-        profiles={profiles}
-      />
+      <ProfileCardsGrid title="Title Lorem Ipsum" profiles={profiles} />
     </Layout>
   );
 };
