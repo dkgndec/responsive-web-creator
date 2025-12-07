@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { LandingHero } from "@/components/sections/LandingHero";
 import { AccordionSection } from "@/components/sections/AccordionSection";
 import { FeaturesCardGrid } from "@/components/sections/FeaturesCardGrid";
+import { ProfileCardsGrid } from "@/components/sections/ProfileCardsGrid";
 
 const accordionItems = [
   {
@@ -96,6 +97,44 @@ const featureCards = [
   },
 ];
 
+const profiles = [
+  {
+    id: "1",
+    name: "Profile Name",
+    designation: "Designation",
+    location: "City, State, Country",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
+  },
+  {
+    id: "2",
+    name: "Profile Name",
+    designation: "Designation",
+    location: "City, State, Country",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+  },
+  {
+    id: "3",
+    name: "Profile Name",
+    designation: "Designation",
+    location: "City, State, Country",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
+  },
+  {
+    id: "4",
+    name: "Profile Name",
+    designation: "Designation",
+    location: "City, State, Country",
+    initials: "DS",
+  },
+  {
+    id: "5",
+    name: "Profile Name",
+    designation: "Designation",
+    location: "City, State, Country",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",
+  },
+];
+
 const Landing = () => {
   return (
     <Layout>
@@ -118,6 +157,11 @@ const Landing = () => {
         viewAllHref="/insights"
         viewAllText="View all news"
         cards={featureCards}
+      />
+
+      <ProfileCardsGrid
+        title="Title Lorem Ipsum"
+        profiles={profiles}
       />
     </Layout>
   );
