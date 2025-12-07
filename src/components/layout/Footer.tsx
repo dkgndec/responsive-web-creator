@@ -1,117 +1,137 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { Facebook, Twitter, Linkedin, Instagram, Youtube } from "lucide-react";
 
 const footerLinks = {
-  company: [
-    { label: "About Us", href: "/overview" },
+  explore: [
+    { label: "Home", href: "/" },
+    { label: "Industries", href: "/industries" },
+    { label: "Capabilities", href: "/capabilities" },
+    { label: "Featured Insights", href: "/insights" },
+  ],
+  connect: [
     { label: "Careers", href: "/careers" },
-    { label: "Contact", href: "/help" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact", href: "/contact" },
+    { label: "Subscribe", href: "/subscribe" },
   ],
-  services: [
-    { label: "Functions", href: "/functions" },
-    { label: "Office Services", href: "/office-services" },
-    { label: "Resources", href: "/resources" },
-  ],
-  community: [
-    { label: "News & Articles", href: "/news" },
-    { label: "Community", href: "/community" },
-    { label: "Help Center", href: "/help" },
+  legal: [
+    { label: "Terms of Use", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Cookie Policy", href: "/cookies" },
+    { label: "Accessibility", href: "/accessibility" },
   ],
 };
 
+const socialLinks = [
+  { icon: Facebook, href: "#", label: "Facebook" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Youtube, href: "#", label: "YouTube" },
+];
+
 export const Footer = () => {
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="container mx-auto px-4 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <Link to="/" className="inline-block">
-              <span className="text-2xl font-display font-bold text-foreground">
-                & Company
-              </span>
+    <footer className="bg-navy text-white">
+      {/* CTA Section */}
+      <div className="border-b border-white/10">
+        <div className="container-wide py-12">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <h3 className="text-xl md:text-2xl font-semibold text-center md:text-left">
+              Connect with our Practice
+            </h3>
+            <Link 
+              to="/contact"
+              className="px-6 py-3 bg-primary text-white rounded-sm font-medium hover:bg-primary/90 transition-colors"
+            >
+              Contact Us
             </Link>
-            <p className="mt-4 text-muted-foreground text-sm leading-relaxed">
-              Building the future together. We provide innovative solutions for modern businesses.
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer */}
+      <div className="container-wide py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          {/* Brand */}
+          <div className="lg:col-span-2">
+            <div className="mb-6">
+              <span className="text-xl font-bold">Consulting</span>
+              <span className="text-sm text-white/70 ml-1">& Company</span>
+            </div>
+            <p className="text-white/70 text-sm leading-relaxed max-w-sm mb-6">
+              We help organizations achieve lasting impact through strategic 
+              consulting, innovation, and operational excellence.
             </p>
+            {/* Social Links */}
+            <div className="flex gap-4">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                >
+                  <social.icon className="h-5 w-5" />
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Company Links */}
+          {/* Explore */}
           <div>
-            <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Company
-            </h4>
+            <h4 className="font-semibold mb-4">Explore</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {footerLinks.explore.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 group"
-                  >
+                  <Link to={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
                     {link.label}
-                    <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services Links */}
+          {/* Connect */}
           <div>
-            <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Services
-            </h4>
+            <h4 className="font-semibold mb-4">Connect</h4>
             <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
+              {footerLinks.connect.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 group"
-                  >
+                  <Link to={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
                     {link.label}
-                    <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Community Links */}
+          {/* Legal */}
           <div>
-            <h4 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              Community
-            </h4>
+            <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-3">
-              {footerLinks.community.map((link) => (
+              {footerLinks.legal.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 group"
-                  >
+                  <Link to={link.href} className="text-white/70 hover:text-white text-sm transition-colors">
                     {link.label}
-                    <ArrowRight className="h-3 w-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} & Company. All rights reserved.
+      {/* Bottom Bar */}
+      <div className="border-t border-white/10">
+        <div className="container-wide py-6">
+          <p className="text-white/50 text-sm text-center md:text-left">
+            © {new Date().getFullYear()} Consulting & Company. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Privacy Policy
-            </Link>
-            <Link to="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Terms of Service
-            </Link>
-          </div>
         </div>
       </div>
     </footer>
   );
 };
+
+export default Footer;

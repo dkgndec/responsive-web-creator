@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Overview", href: "/overview" },
-  { label: "Functions", href: "/functions" },
-  { label: "Office Services", href: "/office-services" },
-  { label: "Community", href: "/community" },
-  { label: "News & Articles", href: "/news" },
-  { label: "Help", href: "/help" },
-  { label: "Resources", href: "/resources" },
+  { label: "Industries", href: "/industries", hasDropdown: true },
+  { label: "Capabilities", href: "/capabilities", hasDropdown: true },
+  { label: "Featured Insights", href: "/insights" },
+  { label: "Careers", href: "/careers" },
+  { label: "About Us", href: "/about" },
 ];
 
 export const Header = () => {
@@ -19,14 +16,15 @@ export const Header = () => {
   const location = useLocation();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+    <header className="sticky top-0 z-50 w-full bg-navy text-white">
+      <div className="container-wide">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-xl lg:text-2xl font-display font-bold text-foreground">
-              & Company
-            </span>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold leading-tight">Consulting</span>
+              <span className="text-xs text-white/70">& Company</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -35,57 +33,53 @@ export const Header = () => {
               <Link
                 key={item.href}
                 to={item.href}
-                className={cn(
-                  "nav-link text-sm font-medium py-2",
-                  location.pathname === item.href && "nav-link-active"
-                )}
+                className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-white/80 ${
+                  location.pathname === item.href ? "text-white" : "text-white/90"
+                }`}
               >
                 {item.label}
+                {item.hasDropdown && <ChevronDown className="h-4 w-4" />}
               </Link>
             ))}
           </nav>
 
-          {/* Search & Mobile Menu */}
+          {/* Right Actions */}
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground">
+            <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
               <Search className="h-5 w-5" />
             </Button>
-            
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden text-muted-foreground hover:text-foreground"
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="lg:hidden text-white hover:bg-white/10"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <nav className="lg:hidden py-4 border-t border-border animate-fade-in">
-            <div className="flex flex-col gap-2">
-              {navItems.map((item, index) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={cn(
-                    "px-4 py-3 rounded-md text-sm font-medium transition-colors",
-                    location.pathname === item.href
-                      ? "bg-secondary text-foreground"
-                      : "text-muted-foreground hover:bg-secondary/50 hover:text-foreground"
-                  )}
-                  onClick={() => setIsMenuOpen(false)}
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </nav>
-        )}
       </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="lg:hidden bg-navy border-t border-white/10">
+          <nav className="container-wide py-4 flex flex-col gap-2">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center justify-between py-3 text-base font-medium text-white/90 hover:text-white border-b border-white/10"
+              >
+                {item.label}
+                {item.hasDropdown && <ChevronDown className="h-4 w-4" />}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
+
+export default Header;
