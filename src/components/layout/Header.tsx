@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Search, ChevronDown } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, Search, ChevronDown, LogIn, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
 
 const navItems = [
   { label: "Industries", href: "/industries", hasDropdown: true },
@@ -14,6 +15,13 @@ const navItems = [
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-navy text-white">
@@ -48,6 +56,31 @@ export const Header = () => {
             <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
               <Search className="h-5 w-5" />
             </Button>
+            
+            {user ? (
+              <Button 
+                variant="ghost" 
+                size="sm"
+                className="hidden lg:flex text-white hover:bg-white/10 gap-2"
+                onClick={handleSignOut}
+              >
+                <LogOut className="h-4 w-4" />
+                Sign Out
+              </Button>
+            ) : (
+              <Button 
+                variant="ghost" 
+                size="sm"
+                className="hidden lg:flex text-white hover:bg-white/10 gap-2"
+                asChild
+              >
+                <Link to="/auth">
+                  <LogIn className="h-4 w-4" />
+                  Sign In
+                </Link>
+              </Button>
+            )}
+            
             <Button 
               variant="ghost" 
               size="icon" 
@@ -75,6 +108,28 @@ export const Header = () => {
                 {item.hasDropdown && <ChevronDown className="h-4 w-4" />}
               </Link>
             ))}
+            
+            {user ? (
+              <button
+                onClick={() => {
+                  handleSignOut();
+                  setIsMenuOpen(false);
+                }}
+                className="flex items-center gap-2 py-3 text-base font-medium text-white/90 hover:text-white"
+              >
+                <LogOut className="h-4 w-4" />
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                to="/auth"
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-2 py-3 text-base font-medium text-white/90 hover:text-white"
+              >
+                <LogIn className="h-4 w-4" />
+                Sign In
+              </Link>
+            )}
           </nav>
         </div>
       )}
