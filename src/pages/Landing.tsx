@@ -104,6 +104,7 @@ const profiles = [
     designation: "Designation",
     location: "City, State, Country",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80",
+    href: "/team/1",
   },
   {
     id: "2",
@@ -111,6 +112,7 @@ const profiles = [
     designation: "Designation",
     location: "City, State, Country",
     image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+    href: "/team/2",
   },
   {
     id: "3",
@@ -118,6 +120,7 @@ const profiles = [
     designation: "Designation",
     location: "City, State, Country",
     image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
+    href: "/team/3",
   },
   {
     id: "4",
@@ -125,6 +128,7 @@ const profiles = [
     designation: "Designation",
     location: "City, State, Country",
     initials: "DS",
+    href: "/team/4",
   },
   {
     id: "5",
@@ -132,6 +136,7 @@ const profiles = [
     designation: "Designation",
     location: "City, State, Country",
     image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",
+    href: "/team/5",
   },
 ];
 
