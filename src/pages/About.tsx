@@ -15,7 +15,7 @@ const stats = [
 const leadership = [
   {
     name: "Robert Williams",
-    title: "Global Managing Partner",
+    title: "Global test Managing Partner",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80",
     href: "/about/leadership/robert-williams",
   },
