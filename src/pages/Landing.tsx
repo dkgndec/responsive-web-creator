@@ -81,7 +81,7 @@ const Landing = () => {
       />
 
       <AccordionSection
-        heading="Heading Lorem Ipsum"
+        heading="Accordion heading"
         items={accordionItems.map((item) => ({
           id: item.id,
           title: item.title,
